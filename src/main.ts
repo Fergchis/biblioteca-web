@@ -23,25 +23,25 @@ import { App } from './app/app';
 //         `invalid_scope`.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// import { Amplify } from 'aws-amplify';
-//
-// Amplify.configure({
-//   Auth: {
-//     Cognito: {
-//       userPoolId:       'us-east-1_XXXXXXXXX',
-//       userPoolClientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',
-//       loginWith: {
-//         oauth: {
-//           domain:          'biblioteca-XXX-0000.auth.us-east-1.amazoncognito.com',
-//           scopes:          ['openid', 'profile', 'biblioteca/libros.leer'],
-//           redirectSignIn:  ['http://localhost:4200/callback'],
-//           redirectSignOut: ['http://localhost:4200'],
-//           responseType:    'code',
-//         },
-//       },
-//     },
-//   },
-// });
+import { Amplify } from 'aws-amplify';
+
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId:       'us-east-1_2ainfnzar',
+      userPoolClientId: 'ifg6i2bilchroql1l1ps6r346',
+      loginWith: {
+        oauth: {
+          domain:          'us-east-12ainfnzar.auth.us-east-1.amazoncognito.com',
+          scopes:          ['openid', 'profile', 'biblioteca/libros.leer'],
+          redirectSignIn:  ['http://localhost:4200/callback'],
+          redirectSignOut: ['http://localhost:4200'],
+          responseType:    'code',
+        },
+      },
+    },
+  },
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 🔨 Y esta línea, que es la que se olvida. Es lo que hace que Amplify
@@ -50,6 +50,6 @@ import { App } from './app/app';
 //    absolutamente nada — el síntoma que te describe `/callback`.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// import 'aws-amplify/auth/enable-oauth-listener';
+import 'aws-amplify/auth/enable-oauth-listener';
 
 bootstrapApplication(App, appConfig).catch((err) => console.error(err));

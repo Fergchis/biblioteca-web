@@ -1,15 +1,20 @@
 <header>
   <h1>Biblioteca</h1>
   <nav>
-    <a routerLink="/libros" routerLinkActive="activo">Catálogo</a>
+  <a routerLink="/libros" routerLinkActive="activo">Catálogo</a>
+
+  @if (esBibliotecario()) {
     <a routerLink="/prestamos" routerLinkActive="activo">Préstamos</a>
+  } 
   </nav>
 
   <!--
     🔨 TRAMO 8.4 · Acá va el botón de login:
+  -->
 
         <button (click)="entrar()">Entrar</button>
 
+  <!--
     y en el componente:
 
         import { signInWithRedirect } from 'aws-amplify/auth';

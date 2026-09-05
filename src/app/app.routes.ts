@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Libros } from './libros/libros';
 import { Prestamos } from './prestamos/prestamos';
 import { Callback } from './callback/callback';
+import { sesionGuard } from './auth/sesion.guard';
 
 /**
  * Las rutas de la aplicación.
@@ -25,7 +26,7 @@ import { Callback } from './callback/callback';
  */
 export const routes: Routes = [
   { path: '', redirectTo: 'libros', pathMatch: 'full' },
-  { path: 'libros', component: Libros },
-  { path: 'prestamos', component: Prestamos },
+  { path: 'libros', component: Libros, canActivate: [sesionGuard] },
+  { path: 'prestamos', component: Prestamos, canActivate: [sesionGuard]},
   { path: 'callback', component: Callback },
 ];
