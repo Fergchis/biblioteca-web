@@ -1,44 +1,36 @@
 <header>
   <h1>Biblioteca</h1>
-  <nav>
-  <a routerLink="/libros" routerLinkActive="activo">Catálogo</a>
 
-  @if (esBibliotecario()) {
-    <a routerLink="/prestamos" routerLinkActive="activo">Préstamos</a>
-  } 
+  <nav>
+    <a routerLink="/libros" routerLinkActive="activo">Catálogo</a>
+
+    @if (esBibliotecario()) {
+      <a routerLink="/prestamos" routerLinkActive="activo">Préstamos</a>
+    }
   </nav>
 
-  <!--
-    🔨 TRAMO 8.4 · Acá va el botón de login:
-  -->
-
-        <button (click)="entrar()">Entrar</button>
-
-  <!--
-    y en el componente:
-
-        import { signInWithRedirect } from 'aws-amplify/auth';
-        async entrar() { await signInWithRedirect(); }
-
-    Una llamada. Eso es todo el tramo 6 —el PKCE, la URL de /authorize, el
-    canje— hecho por una librería.
-
-    ⚠ Es `signInWithRedirect()`, **no** `signIn({ username, password })`.
-      `signIn()` autentica contra la API con tu propia pantalla y el token que
-      te da **no trae tus scopes personalizados**: los scopes de resource
-      server solo los emiten los endpoints de OAuth. El login te va a
-      funcionar perfecto y el gateway te va a responder 403 a todo. Tramo 8.5.
-  -->
+  <button (click)="entrar()">Entrar</button>
 </header>
 
 <main>
   <router-outlet />
+
+  <button (click)="cargarPanel()" [disabled]="cargando()">Ver mis prestamos</button>
+
+  <ul>
+    @for (p of panel(); track p.id) {
+      <li>{{ p.libro.titulo }} — {{ p.libro.autor }}, hasta el {{ p.hasta }}</li>
+    } @empty {
+      <li>No tienes prestamos.</li>
+    }
+  </ul>
 </main>
 
 <footer>
   <p class="apagado">
     El gateway está en <code>http://localhost:8080</code>. Si esta página no
     muestra datos, revisa que estén corriendo los dos microservicios y el
-    gateway. <a href="https://github.com/Umbingelelo/biblioteca-gateway">biblioteca-gateway</a>
+    gateway.
+    <a href="https://github.com/Umbingelelo/biblioteca-gateway">biblioteca-gateway</a>
   </p>
 </footer>
